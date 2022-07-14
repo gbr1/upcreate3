@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<robot name="upcreate3" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="CREATE3_TOP_Z" value="0.0934"/>
+  <xacro:property name="CREATE3_GRID" value="0.012"/>
+
+  <xacro:property name="BRACKET_GRID_X" value="-6.5"/>
+  <xacro:property name="BRACKET_GRID_Y" value="0"/>
+
+
+
+  <!-- iRobot Create3 -->
+  <xacro:include filename="$(find irobot_create_description)/urdf/create3.urdf.xacro" />
+
+  <!-- Bracket for Realsense camera -->
+  <xacro:include filename="$(find upcreate3_description)/urdf/parts/realsense_bracket.urdf.xacro" />
+
+  <joint name="realsense_bracket_base_joint" type="fixed">
+      <origin xyz="${BRACKET_GRID_X*CREATE3_GRID}  ${BRACKET_GRID_Y*CREATE3_GRID} ${CREATE3_TOP_Z}" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="realsense_bracket_base" />
+  </joint>
+
+  <!-- Realsense -->
+  <xacro:include filename="$(find upcreate3_description)/urdf/sensors/realsense.urdf.xacro" />
+</robot>

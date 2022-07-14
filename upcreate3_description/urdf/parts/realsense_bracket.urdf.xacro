@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="realsense_bracket" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+    <xacro:property name="M_PI_2" value="1.570796327" />    
+
+    <gazebo reference="realsense_bracket_base">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <material name="light_blue">
+        <color rgba="0 0.5 1.0 1"/>
+    </material>
+
+    <link name="realsense_bracket_base">
+        <visual>
+            <origin xyz="0.078 0 -0.054" rpy="${M_PI_2} 0 ${M_PI_2}"/>
+            <geometry>
+                <mesh filename="package://upcreate3_description/meshes/C3-RealSense-D435-Mount.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="light_blue"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.001" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+      </inertial>
+    </link>
+
+    <link name="realsense_bracket_camera_mount">
+    </link>
+
+    <joint name="realsense_bracket_joint" type="fixed">
+      <origin xyz="0.047 0.0 0.0895" rpy="0 0 0"/>
+      <parent link="realsense_bracket_base"/>
+      <child link="realsense_bracket_camera_mount" />
+    </joint>
+</robot>

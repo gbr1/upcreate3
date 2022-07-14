@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="realsense2_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="use_nominal_extrinsics" default="false"/>
+  <xacro:arg name="use_mesh" default="true" />
+  <xacro:include filename="$(find upcreate3_description)/urdf/sensors/realsense/d435.urdf.xacro" />
+  
+  <xacro:sensor_d435 parent="realsense_bracket_camera_mount" use_nominal_extrinsics="$(arg use_nominal_extrinsics)" use_mesh="$(arg use_mesh)">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:sensor_d435>
+</robot>
