@@ -28,10 +28,20 @@ def generate_launch_description():
         output='screen',
         parameters=[
             {'use_sim_time': LaunchConfiguration('use_sim_time')},
-            {'robot_description': Command(['xacro', ' ', xacro_file, ' ', 'gazebo:=ignition'])},
+            {'robot_description': Command(['xacro', ' ', xacro_file, ' ',
+                                           'gazebo:=classic'])},
         ],
+    )
+
+    joint_state_publisher = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        output='screen',
     )
 
     ld = LaunchDescription(ARGUMENTS)
     ld.add_action(robot_state_publisher)
+    ld.add_action(joint_state_publisher)
+
     return ld
